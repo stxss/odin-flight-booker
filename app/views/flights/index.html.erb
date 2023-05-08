@@ -1,0 +1,13 @@
+<%= form_with url: "/search", method: :get do |form| %>
+
+    <%= form.collection_select :departing_airport, Airport.order(:name), :id, :code %>
+    to
+    <%= form.collection_select :arriving_airport, Airport.order(:name), :id, :code %>
+    Passengers:
+    <%= form.select :passenger_num, 1..4 %>
+    Departing on
+    <%= form.collection_select :departure_date, Flight.order(:departure_date), :id, :departure_date %>
+
+
+  <%= form.submit "Search" %>
+<% end %>
