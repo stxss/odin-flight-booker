@@ -48,8 +48,8 @@ airports = Airport.create([{
 15.times do |f|
   dep, arr = Airport.pluck(:id).sample(2)
 
-  Flight.create(departure_airport: dep,
-    arrival_airport: arr,
+  Flight.create(departure_airport_id: dep,
+    arrival_airport_id: arr,
     departure_time: rand(DateTime.current..1.years.from_now),
     duration: rand(24.hours))
 end
