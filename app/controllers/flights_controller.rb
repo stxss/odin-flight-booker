@@ -1,6 +1,7 @@
 class FlightsController < ApplicationController
   def index
     @search_flights = Flight.all.return_flights(search_params)
+    @passenger_num = search_params[:passenger_num]
   end
 
   private

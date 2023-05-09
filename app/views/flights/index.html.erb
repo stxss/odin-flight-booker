@@ -16,19 +16,27 @@
     Available flights will appear here
   </div>
 <% else %>
-  <% @search_flights.each do |f| %>
-    <div>
-      From
-      <%= f.departure_airport_id %>
-      to
-      <%= f.arrival_airport_id %>
-      on
-      <%= f.departure_date %>
-      at
-      <%= f.departure_time.strftime("%H:%M") %>
 
-      Arrival at
-    <%= (f.departure_time + f.duration).strftime("%H:%M") %>
-    </div>
+  <%= form_with model: @booking do |form|%>
+    <% @search_flights.each do |flight| %>
+
+      <div>
+        <%= form.radio_button :flight, flight.id, checked: false %>
+        <%= form.label :flight %>
+
+        From
+        <%= flight.departure_airport_id %>
+        to
+        <%= flight.arrival_airport_id %>
+        on
+        <%= flight.departure_date %>
+        at
+        <%= flight.departure_time.strftime("%H:%M") %>
+        Arrival at
+      <%= (flight.departure_time + flight.duration).strftime("%H:%M") %>
+      <%= form.hidden_field :passenger_num, value: @passenger_num %>
+      </div>
+    <% end %>
+    <%= form.submit "Book flight" %>
   <% end %>
 <% end %>
