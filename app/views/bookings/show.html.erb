@@ -1,0 +1,25 @@
+<%= form_with url: "/flights", method: :get do |form| %>
+
+    <%= form.collection_select :departure_airport_id, Airport.order(:name), :id, :code %>
+    to
+    <%= form.collection_select :arrival_airport_id, Airport.order(:name), :id, :code %>
+    Passengers:
+    <%= form.select :passenger_num, 1..4 %>
+    Departing on
+    <%= form.select :departure_date, Time.current.to_date..Time.current.advance(years: +0.3).to_date %>
+  <%= form.submit "Search" %>
+<% end %><br />
+
+<div>
+    <%= Flight.find(@booking.flight_id).info %>
+</div><br />
+<div>
+    <% @booking.passengers.each_with_index do |b, idx| %>
+        <div>
+            <%= "Passenger #{idx + 1}." %>
+            <%= b.name %><br />
+            <%= b.email %>
+            <%= b.name %>
+        </div><br />
+    <% end %>
+</div>
