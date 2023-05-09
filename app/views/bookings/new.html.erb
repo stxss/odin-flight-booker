@@ -1,14 +1,6 @@
-<%= form_with url: "/flights", method: :get do |form| %>
-
-    <%= form.collection_select :departure_airport_id, Airport.order(:name), :id, :code %>
-    to
-    <%= form.collection_select :arrival_airport_id, Airport.order(:name), :id, :code %>
-    Passengers:
-    <%= form.select :passenger_num, 1..4 %>
-    Departing on
-    <%= form.select :departure_date, Time.current.to_date..Time.current.advance(years: +0.3).to_date %>
-  <%= form.submit "Search" %>
-<% end %><br />
+<div>
+    <%= render "shared/search_form" %>
+</div>
 
 <div>
     <%= @flight.info %>.
