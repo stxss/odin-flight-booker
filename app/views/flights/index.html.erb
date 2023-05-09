@@ -6,7 +6,7 @@
     Passengers:
     <%= form.select :passenger_num, 1..4 %>
     Departing on
-    <%= form.select :departure_date, Time.current.to_date..Time.current.advance(years: +0.5).to_date %>
+    <%= form.select :departure_date, Time.current.to_date..Time.current.advance(years: +0.3).to_date %>
   <%= form.submit "Search" %>
 <% end %>
 

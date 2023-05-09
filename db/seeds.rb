@@ -45,10 +45,10 @@ airports = Airport.create([{
     country: "United States"
   }])
 
-100.times do |f|
+2000.times do |f|
   dep, arr = Airport.pluck(:id).sample(2)
 
-  datetime = rand(Time.current..Time.current.advance(years: +0.5))
+  datetime = rand(Time.current..Time.current.advance(years: +0.3))
 
   Flight.create(departure_airport_id: dep,
     arrival_airport_id: arr,
