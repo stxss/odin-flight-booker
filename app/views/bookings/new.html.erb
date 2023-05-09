@@ -1,0 +1,26 @@
+<div>
+    <%= @flight.info %>.
+</div>
+
+<div>
+    Your Flight ID is <%= params[:flight_id] %>.
+</div><br />
+
+<p>Passenger info:</p>
+    <%= form_with model: @booking do |f|%>
+        <% params[:passenger_num].to_i.times do %>
+
+            <%= f.fields_for :passengers, @booking.passengers.build do |p| %>
+            <div>
+                <%= p.label :name %>
+                <%= p.text_field :name, placeholder: "John Doe" %>
+            </div>
+            <div>
+                <%= p.label :email %>
+                <%= p.email_field :email, placeholder: "email@domain.com" %>
+            </div><br />
+            <% end %>
+        <%= f.hidden_field :flight_id, value: params[:flight_id] %>
+    <% end %>
+    <%= f.submit "Confirm Booking" %>
+<% end %>

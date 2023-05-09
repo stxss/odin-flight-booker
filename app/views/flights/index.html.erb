@@ -16,14 +16,14 @@
     Available flights will appear here
   </div>
 <% else %>
-  <%= form_with model: @booking, url: new_booking_path do |form|%>
+  <%= form_with url: new_booking_url, method: :get do |form|%>
     <%= form.collection_radio_buttons :flight_id, @search_flights, :id, :info do |b| %>
       <div>
         <%= b.radio_button %>
         <%= b.label %>
       </div>
-      <%= form.hidden_field :passenger_num, value: @passenger_num %>
     <% end %>
+      <%= form.hidden_field :passenger_num, value: @passenger_num %>
     <%= form.submit "Book flight" %>
   <% end %>
 <% end %>
