@@ -8,10 +8,9 @@
 <div>
     <% @booking.passengers.each_with_index do |b, idx| %>
         <div>
-            <%= "Passenger #{idx + 1}." %>
+            <%= "Passenger #{idx + 1}." %><br />
             <%= b.name %><br />
             <%= b.email %>
-            <%= b.name %>
         </div><br />
     <% end %>
 </div>

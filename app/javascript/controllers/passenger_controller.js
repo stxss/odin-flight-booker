@@ -25,8 +25,8 @@ export default class extends Controller {
         for (let i = 0; i < els.length; i++) {
             els[i].childNodes[1].childNodes[3].id = `booking_passengers_attributes_${i}_name`
             els[i].childNodes[1].childNodes[3].name = `booking[passengers_attributes][${i}][name]`
-            els[i].childNodes[3].childNodes[3].id = `booking_passengers_attributes_${i}_name`
-            els[i].childNodes[3].childNodes[3].name = `booking[passengers_attributes][${i}][name]`
+            els[i].childNodes[3].childNodes[3].id = `booking_passengers_attributes_${i}_email`
+            els[i].childNodes[3].childNodes[3].name = `booking[passengers_attributes][${i}][email]`
         }
     }
 
