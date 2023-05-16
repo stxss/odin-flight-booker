@@ -15,7 +15,7 @@
         <% params[:passenger_num].to_i.times do %>
 
             <%= f.fields_for :passengers, @booking.passengers.build do |p| %>
-                <div id="passenger-field">
+                <div id="passenger-field" data-controller="passenger" data-passenger-target="template" style="display:flex; margin:15px">
                     <div>
                         <%= p.label :name %>
                         <%= p.text_field :name, placeholder: "John Doe" %>
@@ -23,10 +23,11 @@
                     <div>
                         <%= p.label :email %>
                         <%= p.email_field :email, placeholder: "email@domain.com" %>
-                        <button data-controller="passenger" data-passenger-target="remove">Remove passenger</button>
-                    </div><br />
-                    <template data-controller="passenger" data-passenger-target="template">
-                        <div id="passenger-field">
+                    </div>
+                    <button data-controller="passenger" data-passenger-target="remove" type="button" id="remove" data-action="passenger#remove">Remove passenger</button>
+                </div>
+                    <template data-controller="passenger" >
+                        <div id="passenger-field" data-passenger-target="template" style="display:flex; margin:15px">
                             <div>
                                 <%= p.label :name %>
                                 <%= p.text_field :name, placeholder: "John Doe" %>
@@ -34,8 +35,8 @@
                             <div>
                                 <%= p.label :email %>
                                 <%= p.email_field :email, placeholder: "email@domain.com" %>
-                                <button data-controller="passenger" data-passenger-target="remove">Remove passenger</button>
                             </div><br />
+                            <button data-controller="passenger" data-passenger-target="remove" type="button" id="remove" data-action="passenger#remove">Remove passenger</button>
                         </div>
                     </template>
                 </div>
