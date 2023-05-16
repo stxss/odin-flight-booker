@@ -11,20 +11,39 @@
 </div><br />
 
 <p>Passenger info:</p>
-    <%= form_with model: @booking do |f|%>
+    <%= form_with model: @booking, :html => {:id => "passenger"} do |f|%>
         <% params[:passenger_num].to_i.times do %>
 
             <%= f.fields_for :passengers, @booking.passengers.build do |p| %>
-            <div>
-                <%= p.label :name %>
-                <%= p.text_field :name, placeholder: "John Doe" %>
-            </div>
-            <div>
-                <%= p.label :email %>
-                <%= p.email_field :email, placeholder: "email@domain.com" %>
-            </div><br />
+                <div id="passenger-field">
+                    <div>
+                        <%= p.label :name %>
+                        <%= p.text_field :name, placeholder: "John Doe" %>
+                    </div>
+                    <div>
+                        <%= p.label :email %>
+                        <%= p.email_field :email, placeholder: "email@domain.com" %>
+                        <button data-controller="passenger" data-passenger-target="remove">Remove passenger</button>
+                    </div><br />
+                    <template data-controller="passenger" data-passenger-target="template">
+                        <div id="passenger-field">
+                            <div>
+                                <%= p.label :name %>
+                                <%= p.text_field :name, placeholder: "John Doe" %>
+                            </div>
+                            <div>
+                                <%= p.label :email %>
+                                <%= p.email_field :email, placeholder: "email@domain.com" %>
+                                <button data-controller="passenger" data-passenger-target="remove">Remove passenger</button>
+                            </div><br />
+                        </div>
+                    </template>
+                </div>
             <% end %>
         <%= f.hidden_field :flight_id, value: params[:flight_id] %>
     <% end %>
+    <div data-controller="passenger">
+        <button data-passenger-target="add" data-action="passenger#add" type="button">Add passenger</button>
+    </div><br />
     <%= f.submit "Confirm Booking" %>
 <% end %>
