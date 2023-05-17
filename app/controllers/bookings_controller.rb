@@ -6,11 +6,18 @@ class BookingsController < ApplicationController
 
   def create
     @booking = Booking.new(booking_params)
-
-    if @booking.save
-      redirect_to @booking, notice: "Your flight is booked!"
-    else
-      render :new, status: :unprocessable_entity
+    @passenger = booking_params[:passengers_attributes]
+    respond_to do |format|
+      if @booking.save
+        Passenger.where(booking_id: @booking).each do |passenger|
+          PassengerMailer.with(passenger: passenger).confirm_booking.deliver_now!
+        end
+        format.html { redirect_to @booking, notice: "Your flight is booked!" }
+        format.json { render json: @passenger, status: :created, location: @passenger }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @passenger.errors, status: :unprocessable_entity }
+      end
     end
   end
 
